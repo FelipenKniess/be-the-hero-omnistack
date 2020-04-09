@@ -1,2 +1,2 @@
 # be-the-hero-omnistack
-Aplicação feite em nodeJS/ReacNative para web e mobile 
+Aplicação feite em nodeJS/React/ReactNative para web e mobile 
