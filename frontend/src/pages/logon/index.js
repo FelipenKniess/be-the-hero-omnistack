@@ -1,23 +1,47 @@
-import React from 'react';
+import React, { useState } from 'react';
+import {Link, useHistory} from 'react-router-dom';
 import {FiLogIn} from 'react-icons/fi';
 
 import './styles.css';
-import imgLogo from '../../assets/logo.jpg';
-import imgBanner from '../../assets/banner.png';
+import imgLogo from '../../assets/logo.svg';
+import imgBanner from '../../assets/heroes.png';
 
-export default function logon(){
+import api from '../../services/api';
+
+export default function Logon(){
+    const [id, setId] = useState('');
+    const history = useHistory();
+    async function handleLogin(e){
+        e.preventDefault();
+        
+        try {
+            const response = await api.post('sessions', { id });
+            localStorage.setItem('ongId', id);
+            localStorage.setItem('ongName', response.data.name);
+            
+            history.push('/profile');
+        } catch (error) {
+            alert('falha no login');
+        }
+    }
+
     return(
         <div className="logon-container">
             <section className="form">
                 <img src={imgLogo} alt="Be The Hero"/>
-                <form>
+                <form onSubmit={handleLogin}>
                     <h1>Faça seu logon</h1>
-                    <input placeholder="Sua ID"/>
+                    <input 
+                        placeholder="Sua ID"
+                        value={id}
+                        onChange={e => setId(e.target.value)}
+                    />
+                    <button className="button" type="submit">Entrar</button>
 
-                    <a href="/register">
+                    <Link to="/register" className="back-link">
                         <FiLogIn size={16} color="#E02041"/>
                         não tenho cadastro
-                    </a>
+                    </Link>
                 </form>
             </section>
 

@@ -1,11 +1,11 @@
 import React from 'react';
-import Logon from './pages/logon';
+import Routes from './routes';
 import './global.css'
 
 // JSX (JavaSCrip e XML)
 function App() {
   return (
-    <Logon />
+    <Routes />
   );
 };
 export default App;
